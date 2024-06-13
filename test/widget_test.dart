@@ -1,30 +1,59 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('all cards are loaded', (WidgetTester tester) async {
+    tester.view.devicePixelRatio = 1.0;
+    tester.view.physicalSize = Size(412, 915);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(BMICalculator());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    expect(find.byKey(Key('maleCard')), findsOneWidget);
+    expect(find.byKey(Key('femaleCard')), findsOneWidget);
+    expect(find.byKey(Key('heightCard')), findsOneWidget);
+    expect(find.byKey(Key('weightCard')), findsOneWidget);
+    expect(find.byKey(Key('ageCard')), findsOneWidget);
+    expect(find.byKey(Key('calculateButton')), findsOneWidget);
+  });
+
+  testWidgets('counters increment', (WidgetTester tester) async {
+    tester.view.devicePixelRatio = 1.0;
+    tester.view.physicalSize = Size(412, 915);
+
+    await tester.pumpWidget(BMICalculator());
+
+    final initialWeightFinder = find.descendant(
+        of: find.byKey(Key('weightCard')),
+        matching: find.descendant(
+            of: find.byType(Row),
+            matching: find.text('60')
+        ),
+    );
+
+    expect(initialWeightFinder, findsOneWidget);
+
+    final incrementButtonFinder = find.descendant(
+        of: find.byKey(Key('weightCard')),
+        matching: find.descendant(
+            of: find.byType(Row),
+            matching:
+            find.byIcon(FontAwesomeIcons.plus)
+        ),
+    );
+
+    await tester.tap(incrementButtonFinder);
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    final updatedWeightFinder = find.descendant(
+        of: find.byKey(Key('weightCard')),
+        matching: find.descendant(
+            of: find.byType(Row),
+            matching: find.text('61')
+        ),
+    );
+
+    expect(updatedWeightFinder, findsOneWidget);
   });
 }
