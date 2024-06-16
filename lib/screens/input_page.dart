@@ -10,6 +10,8 @@ import 'package:bmi_calculator/calculator_brain.dart';
 enum Gender {male, female}
 
 class InputPage extends StatefulWidget {
+  const InputPage({super.key});
+
   @override
   _InputPageState createState() => _InputPageState();
 }
@@ -24,7 +26,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,7 +36,7 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    cardKey: Key('maleCard'),
+                    cardKey: const Key('maleCard'),
                     onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
@@ -43,7 +45,7 @@ class _InputPageState extends State<InputPage> {
                     colour: selectedGender == Gender.male ?
                             kActiveCardColor :
                             kInactiveCardColor,
-                    cardChild: IconContent(
+                    cardChild: const IconContent(
                       IconText: 'MALE',
                       IconChosen: FontAwesomeIcons.mars,
                     )
@@ -51,7 +53,7 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    cardKey: Key('femaleCard'),
+                    cardKey: const Key('femaleCard'),
                     onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
@@ -60,7 +62,7 @@ class _InputPageState extends State<InputPage> {
                     colour: selectedGender == Gender.female ?
                             kActiveCardColor :
                             kInactiveCardColor,
-                    cardChild: IconContent(
+                    cardChild: const IconContent(
                       IconText: 'FEMALE',
                       IconChosen: FontAwesomeIcons.venus,
                     ),
@@ -72,12 +74,12 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
                 colour: kActiveCardColor,
-              cardKey: Key('heightCard'),
+              cardKey: const Key('heightCard'),
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
 
                 children: <Widget>[
-                  Text(
+                  const Text(
                       'HEIGHT',
                     style: klabelTextStyle,
                   ),
@@ -90,7 +92,7 @@ class _InputPageState extends State<InputPage> {
                         height.toString(),
                         style: kDisplayNumStyle,
                       ),
-                      Text(
+                      const Text(
                         'cm',
                         style: klabelTextStyle,
                       ),
@@ -99,14 +101,14 @@ class _InputPageState extends State<InputPage> {
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                      inactiveTrackColor: Color(0xFF8D8E98),
+                      inactiveTrackColor: const Color(0xFF8D8E98),
                       activeTrackColor: Colors.white,
-                      thumbColor: Color(0xFFEB1555),
-                      overlayColor: Color(0x35EB1555),
-                      thumbShape: RoundSliderThumbShape(
+                      thumbColor: const Color(0xFFEB1555),
+                      overlayColor: const Color(0x35EB1555),
+                      thumbShape: const RoundSliderThumbShape(
                         enabledThumbRadius: 15.0,
                       ),
-                      overlayShape: RoundSliderOverlayShape(
+                      overlayShape: const RoundSliderOverlayShape(
                         overlayRadius: 30.0,
                       )
                     ),
@@ -131,12 +133,12 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                      cardKey: Key('weightCard'),
+                      cardKey: const Key('weightCard'),
                       colour: kActiveCardColor,
                       cardChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             'WEIGHT',
                             style: klabelTextStyle,
                           ),
@@ -149,7 +151,7 @@ class _InputPageState extends State<InputPage> {
                                 weight.toString(),
                                 style: kDisplayNumStyle,
                               ),
-                              Text(
+                              const Text(
                                 'kg',
                                 style: klabelTextStyle,
                               )
@@ -166,7 +168,7 @@ class _InputPageState extends State<InputPage> {
                                   });
                                 }
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10.0,
                               ),
                               RoundIconButton(
@@ -186,11 +188,11 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child:ReusableCard(
                       colour: kActiveCardColor,
-                    cardKey: Key('ageCard'),
+                    cardKey: const Key('ageCard'),
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           'AGE',
                           style: klabelTextStyle,
                         ),
@@ -209,7 +211,7 @@ class _InputPageState extends State<InputPage> {
                                   });
                                 }
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10.0,
                             ),
                             RoundIconButton(
@@ -230,7 +232,7 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           GestureDetector(
-            key: Key('calculateButton'),
+            key: const Key('calculateButton'),
             onTap: () {
               try {
                 CalculatorBrain calc = CalculatorBrain(
@@ -252,11 +254,11 @@ class _InputPageState extends State<InputPage> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Invalid Input'),
+                      title: const Text('Invalid Input'),
                       content: Text(e.toString()),
                       actions: <Widget>[
                         GestureDetector(
-                          child: Text('OK'),
+                          child: const Text('OK'),
                           onTap: () {
                             Navigator.of(context).pop();
                           },
@@ -268,17 +270,17 @@ class _InputPageState extends State<InputPage> {
               }
             },
             child: Container(
-              child: Center(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              color: kBottomContainerColor,
+              margin: const EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: kBottomContainerHeight,
+              child: const Center(
                 child: Text(
                   'CALCULATE',
                   style: kLargeButtonTextStyle,
                 ),
               ),
-              padding: EdgeInsets.only(bottom: 20.0),
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
             ),
           )
         ],

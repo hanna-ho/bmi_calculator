@@ -7,7 +7,7 @@ class ResultsPage extends StatelessWidget {
   final String result;
   final String interpretation;
 
-  const ResultsPage({
+  const ResultsPage({super.key, 
     required this.bmi,
     required this.result,
     required this.interpretation,
@@ -17,7 +17,7 @@ class ResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -25,7 +25,7 @@ class ResultsPage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Container(
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Your Result',
                   style: kTitleTextStyle,
@@ -63,17 +63,17 @@ class ResultsPage extends StatelessWidget {
               Navigator.pop(context);
             },
             child: Container(
-              child: Center(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              color: kBottomContainerColor,
+              margin: const EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: kBottomContainerHeight,
+              child: const Center(
                 child: Text(
                   'RE-CALCULATE',
                   style: kLargeButtonTextStyle,
                 ),
               ),
-              padding: EdgeInsets.only(bottom: 20.0),
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
             ),
           ),
         ],

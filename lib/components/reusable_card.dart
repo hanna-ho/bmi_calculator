@@ -6,7 +6,7 @@ class ReusableCard extends StatelessWidget {
   final Widget? cardChild;
   final VoidCallback? onPress;
 
-  ReusableCard({this.cardKey, required this.colour, this.cardChild, this.onPress});
+  const ReusableCard({super.key, this.cardKey, required this.colour, this.cardChild, this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,12 @@ class ReusableCard extends StatelessWidget {
       key: cardKey,
       onTap: onPress,
       child: Container(
-        child: cardChild,
-        margin: EdgeInsets.all(15.0),
+        margin: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: colour,
         ),
+        child: cardChild,
       ),
     );
   }
